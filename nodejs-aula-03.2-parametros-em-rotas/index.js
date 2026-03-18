@@ -20,22 +20,38 @@ app.get("/perfil", function(req,res){
     // res.send("<h2>Bem-vindo ao seu perfil!</h2>");
     res.render("perfil");
 });
+
+//ROTA DE CLIENTES
 app.get("/clientes", function(req,res){
-    res.render("clientes");
+    const listarClientes = ["Anny","Carol", "Natasha","Maria","Elias"];
+    res.render("clientes",{
+        listarClientes : listarClientes,
+    });
+});
+
+//ROTA DE CLIENTES - COM PARAMETROS
+app.get("/clientes/:cliente", function(req,res){
+    const cliente = req.params.cliente;
+
+    res.render("detalhesCliente",{
+        cliente : cliente,
+    });
 });
 
 //ROTA DE PRODUTOS 
 app.get("/produtos/", function(req,res){
-    const produto = ""
+     const listaProdutos = ["Computador","Celular","Tablet", "Notebook"];
+    // Enviando uma variavel a pagina HTML
     res.render("produtos", {
-        produto : produto,
+         listaProdutos : listaProdutos,
     });
 });
 
 //ROTA DE PRODUTOS - COM PARAMETROS
 app.get("/produtos/:produto", function(req,res){
     const produto = req.params.produto;
-    res.render("produtos", {
+
+    res.render("detalhesProduto", {
         produto : produto,
     });
 });

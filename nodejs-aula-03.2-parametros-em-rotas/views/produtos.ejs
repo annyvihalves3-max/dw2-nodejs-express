@@ -11,15 +11,18 @@
     <h3>Confira nossos produtos!</h3>
     <!-- Exibindo uma VARIAVEL JavaScript dentro do HTML-->
     <!-- Comentario no EJS <%# %> -->
-    <%#= produto %>
+   
 
-    <% if (produto){ %>
+    <!-- Percorrendo o vetor atraves do forEach -->
+     <% listaProdutos.forEach(function(produto) { %>
+        <p> 
+            <a href="/produtos/<%=produto %>">
+            <%= produto %> 
+            </a>
+        </p>
 
-        <p><%= produto %></p>
+     <% }) %>
 
-    <%} %>
-
-    
     <p><a href="/">Voltar para página inicial</a></p>
 </body>
 </html>
