@@ -20,5 +20,6 @@ const Cliente = connection.define("clientes", {
 
 // o MÉTODO SYNC() SICRONIZA OS DADOS COM O BANCO
 // force: false não recria a tabela caso ela já exista
-Cliente.sync({force:false});
+
+
 export default Cliente;

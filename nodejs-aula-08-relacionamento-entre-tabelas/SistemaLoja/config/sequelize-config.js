@@ -14,7 +14,7 @@ const connection = new Sequelize({
     // Fuso horário
     timezone:"-03:00",
     // Nome do banco que será usado na aplicação
-    database: "loja_relacional"
+     database: "loja_relacional"
 });
 // Exportando o mundo
 export default connection; 

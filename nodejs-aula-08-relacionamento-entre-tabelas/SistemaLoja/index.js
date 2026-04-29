@@ -10,6 +10,13 @@ import ProdutoController from "./controllers/ProdutoController.js";
 // Importando o arquivo de conexão com o banco
 import connection from "./config/sequelize-config.js";
 
+// Importando os Models
+import Cliente from "./models/Cliente.js";
+import Pedido from "./models/Pedido.js";
+
+// Importando as associações
+import associations from "./config/associations.js";
+
 // Realizando a conexão com o banco de dados
 connection.authenticate().then(() => {
     console.log("Conexão com o banco de dados realizado com sucesso!")
@@ -21,8 +28,25 @@ connection.authenticate().then(() => {
 connection.query("CREATE DATABASE IF NOT EXISTS loja_relacional;").then(() => {
     console.log("O banco de dados está criado!");
 }).catch((error) =>{
-    console.log("Ocorreu um erro ao criar o banco de dados. Erro: ${error}");
+    console.log(`Ocorreu um erro ao criar o banco de dados. Erro: ${error}`);
 });
+
+// Ivocando a função que cria as associações
+associations();
+
+// Sincronizando os Models de cliente e pedido
+// Transformando as funções em promessas
+Promise.all(
+    [
+        Cliente.sync({force: false}),
+        Pedido.sync({force: false})
+    ]
+).then(() => {
+    console.log("Entidades criadas e relacionadas com sucesso!")
+}).catch(error => {
+    console.log("Ocorreu um erro ao sincronizar os Models." + error);
+});
+
 
 // Iniciando o Express 
  const app = express();
